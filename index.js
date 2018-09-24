@@ -15,31 +15,35 @@ function increaseRankBy(n){
 
 function deepestChild() {
 	
-		  let next = [...document.body.querySelector('#app').children]
-			console.log('next=')
-			console.log(next)
-      let depth=0;
-		  let current = next.shift() //grab one element from next
- 			console.log('current=')
-		  console.log(current)
-      // console.log(current.children[2])
-
-		  while (current) {
-      // 			console.log(current.children.length)
-		    if (current.children.length>0) { //test for objects with (typeof current === "object")
-		      for (let i = 0; i < current.children.length; i++) {
-		        next.push(current.children[i]) //I believe unshifting this value would make a depth first algo
-				    console.log(next)
-            // console.log(i)
-            // depth++
-            // console.log(depth)
-		      }
-		    }
-        // depth--
-        // console.log(depth)
-		    current = next.shift()
-		  }
-		 
-		  // if we haven't
-		  return current
+	let next = [...document.body.querySelector('div#grand-node').children]
+	console.log(`next=${next}`)
+	let depth=0;
+	let current = next.shift() //grab one element from next
+	console.log('current=')
+	console.log(current)
+	while (current !== undefined) {
+		try{
+			while (current.children !== undefined){
+				if (current.children.length>0) { 
+					for (let i = 0; i < current.children.length; i++) {
+						next.push(current.children[i]) 
+						console.log(`current = ${current}`)
+					}
+				} else {
+					console.log('no children here!')
+					console.log(current)
+					return(current)
+                }
+			console.log(`now next=${next}`)
+			current = next.shift()
+        }
+		}	 
+		catch(error){
+			console.log(error)
 		}
+	// if we haven't
+	return current
+	}
+}
+
+deepestChild()
